@@ -1,0 +1,23 @@
+body{
+    height: auto;
+    background-color: #ff8c00;
+}
+
+.containt{
+    height: auto;
+    margin-top: 4vh;
+    background-color: #ff8c00;
+}
+
+.main{
+    min-height: 86vh;
+    background-color: white;
+    margin: 10vh;
+}
+
+.login{
+    padding-left: 25vw;
+    padding-right: 25vw;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}

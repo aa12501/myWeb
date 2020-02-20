@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="/jq/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/my-web.css"/>
+</head>
+<body>
+
+<script type="text/javascript">
+    function reg() {
+        var userId = document.getElementById('userId').value;
+        var email = document.getElementById('email').value;
+        var nickName = document.getElementById('nickName').value;
+        var name = document.getElementById('name').value;
+        var userPassword = document.getElementById('userPassword').value;
+        var userPasswordConfirm = document.getElementById('userPasswordConfirm').value;
+
+        if(userId === ""||userId === null||userId === undefined){
+            alert("账号未填写");
+        } else if(email === ""){
+            alert("邮箱未填写");
+        } else if (nickName === ""){
+            alert("昵称未填写")
+        } else if(name === ""){
+            alert("姓名未填写");
+        } else if(userPassword === ""){
+            alert("密码未填写");
+        } else if(userPasswordConfirm === ""){
+            alert("确认密码未填写");
+        } else if(userPasswordConfirm !== userPassword){
+            alert("密码前后不一致,"+userPasswordConfirm+","+userPassword);
+        }else {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8887/registry",
+                contentType: "application/json; charset=utf-8",
+                data:JSON.stringify({
+                    userId: $("#userId").val(),
+                    email: $("#email").val(),
+                    nickName: $("#nickName").val(),
+                    name: $("#name").val(),
+                    password: $("#userPassword").val()
+                }),
+                success: function (data) {
+                    if (data.toString() === 'ok') {
+                        window.location.href = 'http://localhost:8887/login';
+                    } else {
+                        alert(data.toString());
+                    }
+                }
+            })
+            ;
+        }
+    }
+
+</script>
+
+<div th:replace="navigation::nav"></div>
+<div class="container-fluid containt">
+    <div class="main login">
+        <h2>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            注册您的账号
+        </h2>
+        <form action="/registry" method="post">
+            <div class="form-group">
+                <label for="userId">学号</label>
+                <input name="userId" type="text" class="form-control" id="userId" placeholder="请输入您的学号">
+            </div>
+            <div class="form-group">
+                <label for="email">个人邮箱</label>
+                <input name="email" type="email" class="form-control" id="email"
+                       placeholder="请输入您的邮箱。例如：xxxx@example.com">
+            </div>
+            <div class="form-group">
+                <label for="nickName">昵称</label>
+                <input name="nickName" type="text" class="form-control" id="nickName" placeholder="请输入您的昵称，可修改">
+            </div>
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input name="name" type="text" class="form-control" id="name" placeholder="请输入您的姓名，不可修改">
+            </div>
+            <div class="form-group">
+                <label for="userPassword">密码</label>
+                <input name="userPassword" type="password" class="form-control" id="userPassword" placeholder="输入您的密码">
+            </div>
+            <div class="form-group">
+                <label for="userPasswordConfirm">确认密码</label>
+                <input name="userPasswordConfirm" type="password" class="form-control" id="userPasswordConfirm"
+                       placeholder="再次输入您的密码" }>
+            </div>
+            <div>
+                <button id="registry" type="button" class="btn btn-success" onclick="reg()">注册</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
