@@ -48,6 +48,7 @@
                 }),
                 success: function (data) {
                     if (data.toString() === 'ok') {
+                        alert("注册成功");
                         window.location.href = 'http://localhost:8887/login';
                     } else {
                         alert(data.toString());

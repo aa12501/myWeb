@@ -38,4 +38,9 @@ public class LoginServer implements ILogin {
         userEntity.setGmtCreate(System.currentTimeMillis());
         userMapper.insertSelective(userEntity);
     }
+
+    @Override
+    public void updateUserInfo(UserEntity userEntity){
+        userMapper.updateSelectiveByPrimaryKey(userEntity);
+    }
 }

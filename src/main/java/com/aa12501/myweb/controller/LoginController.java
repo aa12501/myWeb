@@ -22,25 +22,24 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String doLogin(@RequestParam(name = "userId", required = false) Integer userId,
-                          @RequestParam(name = "password", required = false) String password,
-                          Model model,
-                          HttpServletResponse response,
-                          HttpServletRequest request) {
-        if (userId == null) {
-            String error = "账号未填写";
-            model.addAttribute("error", error);
-            return "login";
+    @ResponseBody
+    public String doLogin(@RequestBody UserEntity userEntity,
+                          HttpServletRequest request,
+                          HttpServletResponse response) {
+        String ret = "ok";
+        UserEntity userCheck = loginServer.findById(userEntity.getUserId());
+        if (userCheck == null){
+            ret = "账号不存在或密码错误";
+        }
+        else if (!userCheck.getPassword().equals(userEntity.getPassword())){
+            ret = "账号不存在或密码错误";
+        }else {
+            System.out.println(userCheck);
+            userCheck.setPassword("");
+            request.getSession().setAttribute("user", userCheck);
         }
 
-        if (password == null) {
-            String error = "密码未填写";
-            model.addAttribute("error", error);
-            return "login";
-        }
-
-
-        return null;
+        return ret;
     }
 
     @GetMapping("/registry")
@@ -48,32 +47,16 @@ public class LoginController {
         return "registry";
     }
 
-//    @PostMapping("/registry")
-//    @ResponseBody
-//    public String doRegistry(@RequestParam(value = "userId", required = false) Integer userId,
-//                             @RequestParam(value = "email", required = false) String email,
-//                             @RequestParam(value = "userName", required = false) String userName,
-//                             @RequestParam(value = "userPassword", required = false) String userPassword,
-//                             @RequestParam(value = "userPasswordConfirm", required = false) String userPasswordConfirm) {
-//        try {
-//            loginServer.saveUser(userId, email, userName, userPassword, userPasswordConfirm);
-//        } catch (Exception e) {
-//            return e.getMessage();
-//        }
-//
-//        return "ok";
-//
-//    }
     @PostMapping("/registry")
     @ResponseBody
     public String doRegistry(@RequestBody UserEntity userEntity){
+        String ret = "ok";
         try {
             loginServer.saveUser(userEntity);
         } catch (Exception e) {
-            return e.getMessage();
+            ret = e.getMessage();
         }
 
-        return "ok";
-
+        return ret;
     }
 }

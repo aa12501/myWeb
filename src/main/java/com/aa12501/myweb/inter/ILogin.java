@@ -7,4 +7,6 @@ public interface ILogin {
     void saveUser(UserEntity userEntity);
 
     UserEntity findById(Integer userId);
+
+    void updateUserInfo(UserEntity userEntity);
 }
