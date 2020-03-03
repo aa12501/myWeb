@@ -34,7 +34,6 @@ public class LoginController {
         else if (!userCheck.getPassword().equals(userEntity.getPassword())){
             ret = "账号不存在或密码错误";
         }else {
-            System.out.println(userCheck);
             userCheck.setPassword("");
             request.getSession().setAttribute("user", userCheck);
         }
