@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 @Controller
 public class LoginController {
@@ -34,8 +36,16 @@ public class LoginController {
         else if (!userCheck.getPassword().equals(userEntity.getPassword())){
             ret = "账号不存在或密码错误";
         }else {
+            String token = UUID.randomUUID().toString();
+            userCheck.setToken(token);
+            userCheck.setGmtLastLogin(System.currentTimeMillis());
+            loginServer.updateUserInfo(userCheck);
+
+            Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
+
             userCheck.setPassword("");
-            request.getSession().setAttribute("user", userCheck);
+//            request.getSession().setAttribute("user", userCheck);
         }
 
         return ret;

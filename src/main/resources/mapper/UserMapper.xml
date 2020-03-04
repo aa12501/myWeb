@@ -171,46 +171,46 @@
         <trim prefix="set" suffixOverrides=",">
             user_id=#{userId},
             <if test="password != null">
-                and password=#{password}
+                password=#{password},
             </if>
             <if test="name != null">
-                and name=#{name}
+                name=#{name},
             </if>
             <if test="nickName != null">
-                and nick_name=#{nickName}
+                nick_name=#{nickName},
             </if>
             <if test="email != null">
-                and email=#{email}
+                email=#{email},
             </if>
             <if test="tel != null">
-                and tel=#{tel}
+                tel=#{tel},
             </if>
             <if test="college != null">
-                and college=#{college}
+                college=#{college},
             </if>
             <if test="grade != null">
-                and grade=#{grade}
+                grade=#{grade},
             </if>
             <if test="building != null">
-                and building=#{building}
+                building=#{building},
             </if>
             <if test="room != null">
-                and room=#{room}
+                room=#{room},
             </if>
             <if test="bed != null">
-                and bed=#{bed}
+                bed=#{bed},
             </if>
             <if test="avatarUrl != null">
-                and avatar_url=#{avatarUrl}
+                avatar_url=#{avatarUrl},
             </if>
             <if test="gmtCreate != null">
-                and gmt_create=#{gmtCreate}
+                gmt_create=#{gmtCreate},
             </if>
             <if test="gmtLastLogin != null">
-                and gmt_last_login=#{gmtLastLogin}
+                gmt_last_login=#{gmtLastLogin},
             </if>
             <if test="token != null">
-                and token=#{token}
+                token=#{token},
             </if>
         </trim>
         where user_id=#{userId}

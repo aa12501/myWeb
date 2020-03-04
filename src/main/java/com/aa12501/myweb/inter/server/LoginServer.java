@@ -26,6 +26,13 @@ public class LoginServer implements ILogin {
     }
 
     @Override
+    public UserEntity findByToken(String token){
+        UserEntity user = new UserEntity();
+        user.setToken(token);
+        return userMapper.selectSelective(user);
+    }
+
+    @Override
     public void saveUser(UserEntity userEntity) {
         if (findById(userEntity.getUserId()) != null) {
             throw new RuntimeException("该学号已注册");

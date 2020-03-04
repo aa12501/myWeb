@@ -8,5 +8,7 @@ public interface ILogin {
 
     UserEntity findById(Integer userId);
 
+    UserEntity findByToken(String token);
+
     void updateUserInfo(UserEntity userEntity);
 }
