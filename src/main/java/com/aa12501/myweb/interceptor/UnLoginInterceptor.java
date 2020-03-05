@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Service
-public class LoginInterceptor implements HandlerInterceptor {
+public class UnLoginInterceptor implements HandlerInterceptor {
     /*
     * 已登录的拦截器
     * */
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getSession().getAttribute("user") != null) {
+        if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/");
         }
 

@@ -13,9 +13,9 @@
         <result column="building" jdbcType="VARCHAR" property="building"/>
         <result column="room" jdbcType="INTEGER" property="room"/>
         <result column="bed" jdbcType="INTEGER" property="bed"/>
-        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
-        <result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate"/>
-        <result column="gmtLastLogin" jdbcType="VARCHAR" property="gmtLastLogin"/>
+        <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="gmt_create" jdbcType="VARCHAR" property="gmtCreate"/>
+        <result column="gmt_last_login" jdbcType="VARCHAR" property="gmtLastLogin"/>
         <result column="token" jdbcType="VARCHAR" property="token"/>
     </resultMap>
 

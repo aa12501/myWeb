@@ -25,11 +25,11 @@ public class SessionInterceptor implements HandlerInterceptor {
                     UserEntity user = loginServer.findByToken(cookie.getValue());
                     if (user != null) {
                         long time = System.currentTimeMillis();
-                        if (user.getGmtLastLogin() != null && time - user.getGmtLastLogin() > 1000 * 60 * 60) {
+                        request.getSession().setAttribute("user", user);
+                        if (user.getGmtLastLogin() != null && time - user.getGmtLastLogin() > 1000 * 60 * 30) {
                             user.setGmtLastLogin(time);
                             loginServer.updateUserInfo(user);
                         }
-                        request.getSession().setAttribute("user", user);
                     }
                     break;
                 }

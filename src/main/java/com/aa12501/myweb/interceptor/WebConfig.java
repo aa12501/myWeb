@@ -13,9 +13,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
+    @Autowired
+    private UnLoginInterceptor unLoginInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
         registry.addInterceptor(loginInterceptor).addPathPatterns("/login","/registry");
+        registry.addInterceptor(unLoginInterceptor).addPathPatterns("/profile");
     }
 }

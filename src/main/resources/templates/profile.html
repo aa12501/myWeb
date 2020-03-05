@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>我的主页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="/jq/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/my-web.css"/>
+</head>
+<body>
+
+<div th:replace="navigation::nav"></div>
+
+<div class="container-fluid main profile" th:if="${session.user != null}">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2>
+                <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                发现
+            </h2>
+            <hr>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <img th:src="${session.user.avatarUrl}" class="img-thumbnail img" alt="Responsive image">
+            <div class="inf">
+                你好！
+                <b><span th:text="${session.user.getNickName()}"></span></b><br><br>
+                ID：
+                <b><span th:text="${session.user.getUserId()}"></span></b><br><br>
+                建号时间：<br>
+                <b><span th:text="${#dates.format(session.user.getGmtCreate(),'yyyy-MM-dd')}"></span></b><br><br>
+                上次登录时间：<br>
+                <b><span th:text="${#dates.format(session.user.gmtLastLogin,'yyyy-MM-dd HH:mm:ss')}"></span></b><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
